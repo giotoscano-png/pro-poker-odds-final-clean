@@ -7,7 +7,7 @@ export const SUPPORT_AMOUNT_EUR = 2;
 // IMPORTANTE:
 // Non caricare l'installer .exe dentro GitHub/Vercel se supera 25MB.
 // Caricalo come GitHub Release asset, poi incolla qui il link diretto.
-export const DESKTOP_INSTALLER_URL = 'INSERISCI_LINK_DOWNLOAD_EXE';
+export const DESKTOP_INSTALLER_URL = 'https://github.com/giotoscano-png/pro-poker-odds-final-clean/releases/download/v2.0.0/PRO.Poker.Leak.Finder-Setup-2.0.0.exe';
 export const DESKTOP_INSTALLER_FILENAME = 'PRO Poker Leak Finder-Setup-2.0.0.exe';
 
 export function getPaypalSupportUrl() {
