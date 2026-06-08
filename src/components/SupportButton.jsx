@@ -13,6 +13,8 @@ export default function SupportButton({ compact = false }) {
       return;
     }
 
+    // SOLO PayPal nella stessa scheda.
+    // NON parte nessun download.
     goToSupport();
   };
 

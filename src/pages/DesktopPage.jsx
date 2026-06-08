@@ -17,73 +17,38 @@ import {
   TrendingUp,
   Zap,
 } from 'lucide-react';
+import { useLanguage } from '../i18n.jsx';
 import { startDesktopDownload, SITE_VERSION } from '../config/payment.js';
+import { getLeakFinderCopy } from '../config/leakFinderTranslations.js';
 import '../styles/leak-finder-v562.css';
 
-const leakTypes = [
-  {
-    icon: Target,
-    title: 'Preflop leaks',
-    text: 'Mani giocate troppo larghe, limp passivi, call marginali e raise mancati.',
-  },
-  {
-    icon: Activity,
-    title: 'Postflop passivo',
-    text: 'Linee troppo passive, bet piccole senza piano o check che perdono valore.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Draw pagati male',
-    text: 'Call con progetti senza pot odds sufficienti o implied odds realistiche.',
-  },
-  {
-    icon: AlertTriangle,
-    title: 'River call larghi',
-    text: 'Call finali troppo frequenti quando il range avversario è forte.',
-  },
-  {
-    icon: Brain,
-    title: 'Varianza vs errore',
-    text: 'Separare i bad beat dagli errori veri, per evitare analisi solo sul risultato.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Value missed',
-    text: 'Spot in cui la mano era abbastanza forte per puntare o estrarre più valore.',
-  },
-];
-
-const workflow = [
-  {
-    icon: FileText,
-    title: 'Import sessione',
-    text: 'Carichi un file hand history esportato dal software di gioco.',
-  },
-  {
-    icon: ListChecks,
-    title: 'Classificazione spot',
-    text: 'Ogni mano viene classificata: errore, spot da rivedere, corretto o varianza.',
-  },
-  {
-    icon: History,
-    title: 'Pattern ricorrenti',
-    text: 'Il report evidenzia leak ripetuti, non solo singole mani isolate.',
-  },
-  {
-    icon: Download,
-    title: 'Report esportabile',
-    text: 'Session report più chiaro, storico sessioni e confronto progressivo dei leak.',
-  },
-];
-
-const previewMetrics = [
-  { value: '75', label: 'mani analizzate' },
-  { value: '14', label: 'spot da rivedere' },
-  { value: '8', label: 'possibili errori' },
-  { value: '53', label: 'ok / varianza' },
-];
-
 export default function DesktopPage({ setPage }) {
+  const { language } = useLanguage();
+  const L = getLeakFinderCopy(language);
+
+  const previewMetrics = [
+    { value: '75', label: L.metricHands },
+    { value: '14', label: L.metricReview },
+    { value: '8', label: L.metricErrors },
+    { value: '53', label: L.metricVariance },
+  ];
+
+  const leakTypes = [
+    { icon: Target, title: L.leak1Title, text: L.leak1Text },
+    { icon: Activity, title: L.leak2Title, text: L.leak2Text },
+    { icon: BarChart3, title: L.leak3Title, text: L.leak3Text },
+    { icon: AlertTriangle, title: L.leak4Title, text: L.leak4Text },
+    { icon: Brain, title: L.leak5Title, text: L.leak5Text },
+    { icon: TrendingUp, title: L.leak6Title, text: L.leak6Text },
+  ];
+
+  const workflow = [
+    { icon: FileText, title: L.step1Title, text: L.step1Text },
+    { icon: ListChecks, title: L.step2Title, text: L.step2Text },
+    { icon: History, title: L.step3Title, text: L.step3Text },
+    { icon: Download, title: L.step4Title, text: L.step4Text },
+  ];
+
   const scrollToPreview = () => {
     const element = document.getElementById('leak-report-preview');
     if (element) {
@@ -96,42 +61,38 @@ export default function DesktopPage({ setPage }) {
       <div className="leak-pro-hero">
         <div className="leak-pro-copy">
           <span className="eyebrow">
-            <MonitorDown size={14} /> LEAK FINDER DESKTOP
+            <MonitorDown size={14} /> {L.heroEyebrow}
           </span>
 
-          <h2>Poker Leak Finder</h2>
-          <p>
-            La versione desktop di Analizza Mani per importare sessioni intere,
-            trovare pattern ricorrenti e trasformare le hand history in un report
-            chiaro su errori, leak e varianza.
-          </p>
+          <h2>{L.title}</h2>
+          <p>{L.subtitle}</p>
 
           <div className="leak-pro-actions leak-pro-actions-strong">
             <button className="download-primary-cta" type="button" onClick={startDesktopDownload}>
               <Download size={18} />
-              Download gratis
+              {L.download}
             </button>
 
             <button className="secondary-action" type="button" onClick={scrollToPreview}>
-              Guarda report preview
+              {L.previewCta}
             </button>
 
             {typeof setPage === 'function' && (
               <button className="ghost-action" type="button" onClick={() => setPage('tester')}>
-                Prova Analizza Mani <ArrowRight size={16} />
+                {L.tryAnalyzer} <ArrowRight size={16} />
               </button>
             )}
           </div>
 
           <div className="leak-trust-row">
             <span>
-              <CheckCircle2 size={14} /> Studio post-sessione
+              <CheckCircle2 size={14} /> {L.trust1}
             </span>
             <span>
-              <CheckCircle2 size={14} /> Report leak ricorrenti
+              <CheckCircle2 size={14} /> {L.trust2}
             </span>
             <span>
-              <CheckCircle2 size={14} /> Nessun popup o passaggio extra
+              <CheckCircle2 size={14} /> {L.trust3}
             </span>
           </div>
         </div>
@@ -139,18 +100,15 @@ export default function DesktopPage({ setPage }) {
         <div className="leak-pro-device leak-pro-device-clean" id="leak-report-preview">
           <div className="device-topline">
             <span>
-              <Zap size={14} /> SESSION REPORT PREVIEW
+              <Zap size={14} /> {L.previewEyebrow}
             </span>
-            <strong>DESKTOP BETA</strong>
+            <strong>{L.previewBadge}</strong>
           </div>
 
           <div className="device-main-score">
-            <span>LEAK PRINCIPALE RILEVATO</span>
-            <strong>River call troppo larghi</strong>
-            <p>
-              Pattern simulato: diversi call al river sembrano poco giustificati
-              da equity, pot odds o range avversario.
-            </p>
+            <span>{L.mainLeakLabel}</span>
+            <strong>{L.mainLeakValue}</strong>
+            <p>{L.mainLeakText}</p>
           </div>
 
           <div className="device-metrics">
@@ -164,13 +122,13 @@ export default function DesktopPage({ setPage }) {
 
           <div className="device-leak-list">
             <div className="risk-high">
-              <AlertTriangle size={15} /> Priorità alta: river call costosi
+              <AlertTriangle size={15} /> {L.rowHigh}
             </div>
             <div className="risk-mid">
-              <Clock3 size={15} /> Da monitorare: call preflop marginali
+              <Clock3 size={15} /> {L.rowMid}
             </div>
             <div className="risk-good">
-              <ShieldCheck size={15} /> Linee premium spesso difendibili
+              <ShieldCheck size={15} /> {L.rowGood}
             </div>
           </div>
         </div>
@@ -179,26 +137,23 @@ export default function DesktopPage({ setPage }) {
       <section className="desktop-download-strip">
         <div className="desktop-download-copy">
           <span className="eyebrow">
-            <Download size={14} /> DOWNLOAD DESKTOP
+            <Download size={14} /> {L.downloadEyebrow}
           </span>
-          <h3>Scarica subito Leak Finder PRO</h3>
-          <p>
-            Un unico download per lavorare sulle hand history con report di sessione,
-            classificazione degli spot e analisi dei leak più ricorrenti.
-          </p>
+          <h3>{L.downloadTitle}</h3>
+          <p>{L.downloadText}</p>
         </div>
 
         <div className="desktop-download-actions">
           <div className="desktop-download-badges">
-            <span><CheckCircle2 size={14} /> Import hand history</span>
-            <span><CheckCircle2 size={14} /> Leak Finder completo</span>
-            <span><CheckCircle2 size={14} /> Report sessione e storico</span>
-            <span><CheckCircle2 size={14} /> Interfaccia desktop dedicata</span>
+            <span><CheckCircle2 size={14} /> {L.badge1}</span>
+            <span><CheckCircle2 size={14} /> {L.badge2}</span>
+            <span><CheckCircle2 size={14} /> {L.badge3}</span>
+            <span><CheckCircle2 size={14} /> {L.badge4}</span>
           </div>
 
           <button className="download-primary-cta large" type="button" onClick={startDesktopDownload}>
             <Download size={18} />
-            Download gratis
+            {L.download}
           </button>
         </div>
       </section>
@@ -207,13 +162,10 @@ export default function DesktopPage({ setPage }) {
         <div className="section-header compact">
           <div>
             <span className="eyebrow">
-              <Brain size={14} /> LEAK RILEVABILI
+              <Brain size={14} /> {L.detectEyebrow}
             </span>
-            <h2>Cosa trova la versione desktop</h2>
-            <p>
-              L&apos;obiettivo è andare oltre la singola mano: individuare abitudini
-              ripetute che, nel tempo, possono costare valore.
-            </p>
+            <h2>{L.detectTitle}</h2>
+            <p>{L.detectText}</p>
           </div>
         </div>
 
@@ -234,13 +186,10 @@ export default function DesktopPage({ setPage }) {
         <div className="section-header compact">
           <div>
             <span className="eyebrow">
-              <ListChecks size={14} /> WORKFLOW REPORT
+              <ListChecks size={14} /> {L.workflowEyebrow}
             </span>
-            <h2>Da hand history a report sessione</h2>
-            <p>
-              Un flusso più chiaro e più credibile, con focus sullo studio e non sul
-              semplice effetto “coming soon”.
-            </p>
+            <h2>{L.workflowTitle}</h2>
+            <p>{L.workflowText}</p>
           </div>
         </div>
 
@@ -260,23 +209,19 @@ export default function DesktopPage({ setPage }) {
 
       <div className="leak-disclaimer">
         <ShieldCheck size={18} />
-        <p>
-          Poker Leak Finder è pensato per studio post-sessione. Non offre assistenza
-          live durante il gioco, non garantisce vincite e non sostituisce un solver
-          professionale.
-        </p>
+        <p>{L.disclaimer}</p>
       </div>
 
       <div className="leak-bottom-cta">
         <div>
-          <span>PRO Poker Odds V{SITE_VERSION}</span>
-          <h3>Vuoi il download sempre in evidenza? Ora è qui.</h3>
-          <p>Nessun bottone sbiadito: il download principale resta visibile e attivo.</p>
+          <span>{L.bottomSmall.replace('{version}', SITE_VERSION)}</span>
+          <h3>{L.bottomTitle}</h3>
+          <p>{L.bottomText}</p>
         </div>
 
         <button className="download-primary-cta" type="button" onClick={startDesktopDownload}>
           <Download size={18} />
-          Download gratis
+          {L.download}
         </button>
       </div>
     </section>
