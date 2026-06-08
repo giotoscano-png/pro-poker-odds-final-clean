@@ -13,13 +13,13 @@ export const SITE_VERSION = "5.6.2";
 // Esempio:
 // https://github.com/giotoscano-png/NOME-REPO/releases/latest/download/PRO-Poker-Odds-Installer.exe
 export const INSTALLER_URL =
-  env.VITE_INSTALLER_URL || "INCOLLA_QUI_LINK_INSTALLER_GITHUB_RELEASE";
+  env.VITE_INSTALLER_URL || "https://github.com/giotoscano-png/pro-poker-odds-final-clean/releases/download/v2.0.0/PRO.Poker.Leak.Finder-Setup-2.0.0.exe";
 
 // 2) INCOLLA QUI il link PayPal diretto.
 // Consiglio: PayPal.me, es.
 // https://www.paypal.com/paypalme/TUONOME/2
 export const SUPPORT_URL =
-  env.VITE_SUPPORT_URL || "INCOLLA_QUI_LINK_PAYPAL_SUPPORTO_2_EURO";
+  env.VITE_SUPPORT_URL || "https://www.paypal.com/paypalme/gt17pp/2";
 
 function isMissingUrl(url) {
   return !url || url.includes("INCOLLA_QUI");
