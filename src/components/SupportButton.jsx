@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
-import { isPaypalConfigured, SUPPORT_AMOUNT_EUR, supportAndStartDownload, startDesktopDownload } from '../config/payment.js';
+import { isPaypalConfigured, SUPPORT_AMOUNT_EUR, goToSupport } from '../config/payment.js';
 import { useLanguage } from '../i18n.jsx';
 
 export default function SupportButton({ compact = false }) {
@@ -9,18 +9,25 @@ export default function SupportButton({ compact = false }) {
 
   const handleClick = () => {
     if (!configured) {
-      startDesktopDownload();
       alert(t('notifyPaypal'));
       return;
     }
 
-    supportAndStartDownload();
+    // SOLO PayPal nella stessa scheda.
+    // NON parte nessun download.
+    goToSupport();
   };
 
   return (
-    <button className={compact ? 'support-button compact' : 'support-button'} onClick={handleClick}>
+    <button
+      type="button"
+      className={compact ? 'support-button compact' : 'support-button'}
+      onClick={handleClick}
+    >
       <Heart size={compact ? 14 : 17} />
-      {compact ? t('supportCompact', { amount: SUPPORT_AMOUNT_EUR }) : t('supportButton', { amount: SUPPORT_AMOUNT_EUR })}
+      {compact
+        ? t('supportCompact', { amount: SUPPORT_AMOUNT_EUR })
+        : t('supportButton', { amount: SUPPORT_AMOUNT_EUR })}
     </button>
   );
 }

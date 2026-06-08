@@ -11,15 +11,14 @@ import {
   FileText,
   History,
   ListChecks,
-  Lock,
   MonitorDown,
   ShieldCheck,
   Target,
   TrendingUp,
-  Zap
+  Zap,
 } from 'lucide-react';
 import { useLanguage } from '../i18n.jsx';
-import { supportAndStartDownload } from '../config/payment.js';
+import { SITE_VERSION, startDesktopDownload } from '../config/payment.js';
 
 const leakTypes = [
   { icon: Target, title: 'lfLeak1Title', text: 'lfLeak1Text' },
@@ -49,36 +48,51 @@ export default function DesktopPage({ setPage }) {
 
   const scrollToReport = () => {
     const element = document.getElementById('leak-report-preview');
-    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   return (
     <section className="page-card leak-pro-page">
       <div className="leak-pro-hero">
         <div className="leak-pro-copy">
-          <span className="eyebrow"><MonitorDown size={14} /> {t('lfEyebrow')}</span>
+          <span className="eyebrow">
+            <MonitorDown size={14} /> {t('lfEyebrow')}
+          </span>
+
           <h2>{t('lfTitle')}</h2>
           <p>{t('lfSubtitle')}</p>
 
           <div className="leak-pro-actions">
-            <button className="primary-action" onClick={() => setPage('tester')}>
+            <button className="primary-action" type="button" onClick={() => setPage('tester')}>
               {t('lfPrimaryCta')} <ArrowRight size={18} />
             </button>
+
             <button className="secondary-action" type="button" onClick={scrollToReport}>
               {t('lfSecondaryCta')}
             </button>
           </div>
 
           <div className="leak-trust-row">
-            <span><CheckCircle2 size={14} /> {t('lfTrust1')}</span>
-            <span><CheckCircle2 size={14} /> {t('lfTrust2')}</span>
-            <span><CheckCircle2 size={14} /> {t('lfTrust3')}</span>
+            <span>
+              <CheckCircle2 size={14} /> {t('lfTrust1')}
+            </span>
+            <span>
+              <CheckCircle2 size={14} /> {t('lfTrust2')}
+            </span>
+            <span>
+              <CheckCircle2 size={14} /> {t('lfTrust3')}
+            </span>
           </div>
         </div>
 
         <div className="leak-pro-device" id="leak-report-preview">
           <div className="device-topline">
-            <span><Zap size={14} /> {t('lfReportPreview')}</span>
+            <span>
+              <Zap size={14} /> {t('lfReportPreview')}
+            </span>
             <strong>{t('lfBetaLabel')}</strong>
           </div>
 
@@ -98,9 +112,15 @@ export default function DesktopPage({ setPage }) {
           </div>
 
           <div className="device-leak-list">
-            <div className="risk-high"><AlertTriangle size={15} /> {t('lfReportRow1')}</div>
-            <div className="risk-mid"><Clock3 size={15} /> {t('lfReportRow2')}</div>
-            <div className="risk-good"><ShieldCheck size={15} /> {t('lfReportRow3')}</div>
+            <div className="risk-high">
+              <AlertTriangle size={15} /> {t('lfReportRow1')}
+            </div>
+            <div className="risk-mid">
+              <Clock3 size={15} /> {t('lfReportRow2')}
+            </div>
+            <div className="risk-good">
+              <ShieldCheck size={15} /> {t('lfReportRow3')}
+            </div>
           </div>
         </div>
       </div>
@@ -108,7 +128,9 @@ export default function DesktopPage({ setPage }) {
       <section className="leak-section">
         <div className="section-header compact">
           <div>
-            <span className="eyebrow"><Brain size={14} /> {t('lfDetectEyebrow')}</span>
+            <span className="eyebrow">
+              <Brain size={14} /> {t('lfDetectEyebrow')}
+            </span>
             <h2>{t('lfDetectTitle')}</h2>
             <p>{t('lfDetectText')}</p>
           </div>
@@ -117,7 +139,9 @@ export default function DesktopPage({ setPage }) {
         <div className="leak-type-grid">
           {leakTypes.map(({ icon: Icon, title, text }) => (
             <article key={title} className="leak-type-card">
-              <div className="feature-icon"><Icon size={20} /></div>
+              <div className="feature-icon">
+                <Icon size={20} />
+              </div>
               <h3>{t(title)}</h3>
               <p>{t(text)}</p>
             </article>
@@ -128,7 +152,9 @@ export default function DesktopPage({ setPage }) {
       <section className="leak-section">
         <div className="section-header compact">
           <div>
-            <span className="eyebrow"><ListChecks size={14} /> {t('lfWorkflowEyebrow')}</span>
+            <span className="eyebrow">
+              <ListChecks size={14} /> {t('lfWorkflowEyebrow')}
+            </span>
             <h2>{t('lfWorkflowTitle')}</h2>
             <p>{t('lfWorkflowText')}</p>
           </div>
@@ -138,7 +164,9 @@ export default function DesktopPage({ setPage }) {
           {workflow.map(({ icon: Icon, title, text }, index) => (
             <article key={title} className="workflow-step">
               <div className="workflow-number">{index + 1}</div>
-              <div className="feature-icon"><Icon size={18} /></div>
+              <div className="feature-icon">
+                <Icon size={18} />
+              </div>
               <h3>{t(title)}</h3>
               <p>{t(text)}</p>
             </article>
@@ -149,7 +177,9 @@ export default function DesktopPage({ setPage }) {
       <section className="leak-section leak-premium-section">
         <div className="section-header compact">
           <div>
-            <span className="eyebrow"><Download size={14} /> {t('lfPremiumEyebrow')}</span>
+            <span className="eyebrow">
+              <Download size={14} /> {t('lfPremiumEyebrow')}
+            </span>
             <h2>{t('lfPremiumTitle')}</h2>
             <p>{t('lfPremiumText')}</p>
           </div>
@@ -158,24 +188,33 @@ export default function DesktopPage({ setPage }) {
         <article className="leak-download-card">
           <div className="download-card-main">
             <div className="download-lock">
-              <Lock size={28} />
+              <Download size={28} />
             </div>
+
             <div>
-              <span>{t('lfDownloadBadge')}</span>
+              <span>PRO Poker Odds V{SITE_VERSION}</span>
               <h3>{t('lfDownloadTitle')}</h3>
               <p>{t('lfDownloadText')}</p>
             </div>
           </div>
 
           <div className="download-features">
-            <div><CheckCircle2 size={15} /> {t('lfDownload1')}</div>
-            <div><CheckCircle2 size={15} /> {t('lfDownload2')}</div>
-            <div><CheckCircle2 size={15} /> {t('lfDownload3')}</div>
-            <div><CheckCircle2 size={15} /> {t('lfDownload4')}</div>
+            <div>
+              <CheckCircle2 size={15} /> {t('lfDownload1')}
+            </div>
+            <div>
+              <CheckCircle2 size={15} /> {t('lfDownload2')}
+            </div>
+            <div>
+              <CheckCircle2 size={15} /> {t('lfDownload3')}
+            </div>
+            <div>
+              <CheckCircle2 size={15} /> {t('lfDownload4')}
+            </div>
           </div>
 
-          <button className="download-locked-button" type="button" onClick={supportAndStartDownload}>
-            <Download size={16} /> {t('lfDownloadButton')}
+          <button className="download-locked-button" type="button" onClick={startDesktopDownload}>
+            <Download size={16} /> Download gratis
           </button>
         </article>
       </section>
