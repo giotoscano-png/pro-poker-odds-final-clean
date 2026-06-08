@@ -1,10 +1,9 @@
 // PRO Poker Odds - src/config/payment.js
-// Site/App Version: V5.6.2
-// FIX DEFINITIVO:
+// V5.6.2 UI + logic fix
 // - Download gratis = SOLO download installer
 // - Supporta 2€ = SOLO PayPal nella stessa scheda
-// - Nessun popup PayPal
-// - Nessun download dal pulsante Supporta
+// - Nessun popup
+// - Compatibilità col vecchio codice mantenuta
 
 export const SITE_VERSION = '5.6.2';
 
@@ -30,27 +29,25 @@ export function isDownloadConfigured() {
 
 export function startDesktopDownload() {
   if (!isDownloadConfigured()) {
-    alert('Download non configurato: controlla src/config/payment.js');
+    alert('Download non configurato.');
     return;
   }
 
-  // Download diretto, senza PayPal e senza popup.
   window.location.assign(DESKTOP_INSTALLER_URL);
 }
 
 export function goToSupport() {
   if (!isPaypalConfigured()) {
-    alert('Supporto PayPal non configurato: controlla src/config/payment.js');
+    alert('Supporto PayPal non configurato.');
     return;
   }
 
-  // PayPal nella stessa scheda, senza popup e senza download.
   window.location.assign(getPaypalSupportUrl());
 }
 
-// Compatibilità con vecchi import già presenti nel progetto:
-// prima questa funzione faceva download + PayPal popup.
-// Ora NON scarica più nulla: manda solo a PayPal nella stessa scheda.
+// Compatibilità con vecchi import:
+// prima faceva download + popup PayPal.
+// Adesso manda SOLO a PayPal.
 export function supportAndStartDownload() {
   goToSupport();
 }
