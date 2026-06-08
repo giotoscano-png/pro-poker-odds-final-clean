@@ -1,0 +1,23 @@
+LINK TROVATI PER PRO Poker Odds
+
+REPOSITORY CORRETTO:
+https://github.com/giotoscano-png/pro-poker-odds-final-clean
+
+SITO VERCEL ATTUALE:
+https://repository-name-pro-poker-odds-clea-ten.vercel.app
+
+SITO VERCEL PRECEDENTE / ALTRO REPO:
+https://pro-poker-odds.vercel.app/
+
+INSTALLER GITHUB RELEASE:
+https://github.com/giotoscano-png/pro-poker-odds-final-clean/releases/download/v2.0.0/PRO.Poker.Leak.Finder-Setup-2.0.0.exe
+
+PAYPAL SUPPORTO 2 EURO:
+https://paypal.me/gt17pp/2EUR
+
+BUG TROVATO NEL payment.js ATTUALE:
+La funzione supportAndStartDownload() prima avvia il download e poi fa window.open(PayPal).
+Per questo ti partiva il download e compariva il popup PayPal.
+La patch V5.6.2 separa le due cose:
+- startDesktopDownload() = solo download
+- goToSupport() = solo PayPal nella stessa scheda

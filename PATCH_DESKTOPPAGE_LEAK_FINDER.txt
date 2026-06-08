@@ -1,0 +1,42 @@
+PATCH SCHERMATA LEAK FINDER / src/pages/DesktopPage.jsx
+
+Hai già un bottone download nella schermata Leak Finder.
+Adesso devi SOLO separare Download e Supporto.
+
+1) In alto, cambia l'import da:
+
+import { supportAndStartDownload } from '../config/payment.js';
+
+a:
+
+import { startDesktopDownload, goToSupport, SITE_VERSION } from '../config/payment.js';
+
+2) Nella download card del Leak Finder, sostituisci il vecchio bottone unico con questi 2 bottoni:
+
+<button type="button" className="primary-btn" onClick={startDesktopDownload}>
+  Scarica gratis
+</button>
+
+<button type="button" className="secondary-btn" onClick={goToSupport}>
+  Supporta 2€
+</button>
+
+3) Vicino al titolo della card puoi scrivere:
+
+<span>PRO Poker Odds V{SITE_VERSION}</span>
+
+4) Cerca nel file DesktopPage.jsx:
+
+supportAndStartDownload
+
+e sostituiscilo con:
+
+startDesktopDownload
+
+per evitare che il download apra ancora PayPal.
+
+5) Cerca:
+
+window.open
+
+Non deve esserci per PayPal.
